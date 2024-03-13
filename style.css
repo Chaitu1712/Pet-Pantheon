@@ -1,6 +1,8 @@
 body{
     margin: 0;
     padding: 0;
+    display: flex;
+    flex-direction: column;
 }
 @font-face {
 	font-family: 'Pecita';
@@ -101,10 +103,26 @@ a{
     border-top-right-radius: 25px;
     border-bottom-right-radius: 25px;
 }
+.cart{
+    margin: 0;
+    padding: 0;
+    font-size: 10px;
+    margin-right: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.cart_img{
+    width: 20px;
+    height: 20px;
+    margin: 0;
+    padding: 5px;
+}
 .home{
     margin: 0;
     padding: 0;
-    font-size: 15px;
+    font-size: 10px;
     margin-right: 5px;
     display: flex;
     flex-direction: column;
@@ -112,15 +130,15 @@ a{
     justify-content: center;
 }
 .home_img{
-    width: 30px;
-    height: 30px;
+    width: 20px;
+    height: 20px;
     margin: 0;
     padding: 5px;
 }
 .about{
     margin: 0;
     padding: 0;
-    font-size: 15px;
+    font-size: 10px;
     margin-right: 5px;
     display: flex;
     flex-direction: column;
@@ -128,15 +146,15 @@ a{
     justify-content: center;
 }
 .about_img{
-    width: 30px;
-    height: 30px;
+    width: 20px;
+    height:20px;
     margin: 0;
     padding: 5px;
 }
 .contact{
     margin: 0;
     padding: 0;
-    font-size: 15px;
+    font-size: 10px;
     margin-right:2.5px;
     display: flex;
     flex-direction: column;
@@ -144,15 +162,15 @@ a{
     justify-content: center;
 }
 .contact_img{
-    width: 30px;
-    height: 30px;
+    width: 20px;
+    height: 20px;
     margin: 0;
     padding: 5px;
 }
 .login{
     margin: 0;
     padding: 0;
-    font-size: 15px;
+    font-size: 10px;
     margin-right: 5px;
     display: flex;
     flex-direction: column;
@@ -165,8 +183,8 @@ a{
     transition-delay:2s;
 }
 .login_img{
-    width: 30px;
-    height: 30px;
+    width: 20px;
+    height: 20px;
     margin: 0;
     padding: 5px;
 }
@@ -185,4 +203,17 @@ a{
 }
 .login_frame:focus{
     display: block;
+}
+.login_frame:not(:focus){
+    display: none;
+    content: none;
+}
+.img_container{
+    position: relative;
+    top:70px;
+    overflow: auto;
+    white-space: nowrap;
+}
+.img_container::-webkit-scrollbar{
+    display: none;
 }
