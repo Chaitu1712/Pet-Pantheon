@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SignUp</title>
+    <link rel="icon" href="Images/Icon.png">
+    <link rel="stylesheet" href="style_signup.css">
+</head>
+<body>
+    <div class="signup_container">
+        <div class="signup_form">
+            <form id="signup_form">
+                <div class="signup_header">
+                    <h1>SIGN UP</h1>
+                    <img src="Images/User.png" class="user" alt="User" height="50%">
+                </div>
+                <div class="signup_input">
+                    <input type="text" name="username" id="username" placeholder="Username" title="Username" required>
+                </div>
+                <div class="signup_input">
+                    <input type="password" name="password" id="password" placeholder="Password" class="password" title="Password" required>
+                    <button type="button" class="show_password" id="privacy" value="hidden">
+                        <img src="Images/Show.png" alt="Show"  class="signup_img">
+                    </button>
+                </div>
+                <div class="signup_input">
+                    <input type="password" name="confirm_password" id="confirm_password" placeholder="Confirm Password" class="password" title="Confirm Password" required>
+                    <button type="button" class="show_password" id="privacy1" value="hidden">
+                        <img src="Images/Show.png" alt="Show"  class="signup_img">
+                    </button>
+                </div>
+                <div class="signup_input">
+                    <input type="email" name="email" id="email" placeholder="Email" title="E-Mail" required>
+                </div>
+                <div class="signup_button">
+                    <button type="submit" class="signup" name="signup">SIGN UP</button>
+                </div>
+                <div class="signup_footer">
+                    <p>Already have an account? <a href="login.html">Log in</a></p>
+                </div>
+                <p id="error" style="color: red;"></p>
+            </form>
+        </div>
+        <script type="text/javascript" src="signup_app/signup.js"></script>
+    </div>
+
+</body>
+</html>
