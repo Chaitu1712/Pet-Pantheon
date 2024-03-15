@@ -3,6 +3,7 @@ body{
     padding: 0;
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 @font-face {
 	font-family: 'Pecita';
@@ -49,6 +50,7 @@ a{
     flex-direction: row;
     align-items: center;
     justify-content:space-between;
+    z-index: 1;
 }
 .nav_links{
     display: flex;
@@ -65,6 +67,7 @@ a{
 .search{
     margin: 0;
     padding: 0;
+    margin-right: 10px;
 }
 .search_bar{
     margin: 0;
@@ -102,90 +105,106 @@ a{
     border-width: 0px;
     border-top-right-radius: 25px;
     border-bottom-right-radius: 25px;
+    height:34px;
 }
 .cart{
     margin: 0;
     padding: 0;
-    font-size: 10px;
-    margin-right: 5px;
+    font-size: 11px;
+    margin-right:4px;
+    margin-left:4px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    height:75px;
+    width: 61px;
 }
 .cart_img{
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
     margin: 0;
     padding: 5px;
 }
 .home{
     margin: 0;
     padding: 0;
-    font-size: 10px;
-    margin-right: 5px;
+    font-size: 11px;
+    margin-right:4px;
+    margin-left:4px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    height:75px;
+    width: 61px;
 }
 .home_img{
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
     margin: 0;
     padding: 5px;
 }
 .about{
     margin: 0;
     padding: 0;
-    font-size: 10px;
-    margin-right: 5px;
+    font-size: 11px;
+    margin-right:4px;
+    margin-left:4px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    height:75px;
+    width: 61px;
 }
 .about_img{
-    width: 20px;
-    height:20px;
+    width: 30px;
+    height:30px;
     margin: 0;
     padding: 5px;
 }
 .contact{
     margin: 0;
     padding: 0;
-    font-size: 10px;
-    margin-right:2.5px;
+    font-size: 11px;
+    margin-right:4px;
+    margin-left:4px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    height:75px;
+    width: 61px;
 }
 .contact_img{
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
     margin: 0;
     padding: 5px;
 }
 .login{
     margin: 0;
     padding: 0;
-    font-size: 10px;
-    margin-right: 5px;
+    font-size: 11px;
+    margin-right:4px;
+    margin-left:4px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     transition:0s display;
-    height:60px;
+    height:75px;
+    width: 61px;
 }
 .login:hover .login_frame{
     display: block;
+    z-index: 2;
     transition-delay:2s;
 }
 .login_img{
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
     margin: 0;
     padding: 5px;
 }
@@ -206,17 +225,43 @@ a{
 }
 .login_frame:focus{
     display: block;
+    z-index: 2;
 }
 .login_frame:not(:focus){
     display: none;
     content: none;
 }
+.nav:hover{
+    background-color: white;
+    color:black;
+}
+.nav:hover a{
+    color:black;
+
+}
 .img_container{
     position: relative;
-    top:70px;
-    overflow: auto;
-    white-space: nowrap;
 }
-.img_container::-webkit-scrollbar{
-    display: none;
+.dog_img{
+    width: 100%;
+    height:80vh;
+    object-fit: cover;
+}
+.dog_button{
+    position: relative;
+    top:-70vh;
+    left: 10%;
+    padding: 15px 25px;
+    transform: translateX(-50%);
+    font-weight: bold;
+    font-size: 20px;
+    color: #000000;
+    background-color:white;
+    border: 3px solid #000000;
+    cursor:pointer;
+    transition: 0.25s ease-in-out;
+}
+.dog_button:hover{
+    color: white;
+    background-color: #000000;
 }
