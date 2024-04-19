@@ -11,7 +11,7 @@ btn.addEventListener('click',(event)=>{
     }
 });
  const loginForm = document.getElementById('login_form');
-  const errorElement = document.getElementById('error');
+ const errorElement = document.getElementById('error');
 
   loginForm.addEventListener('submit', (event) => {
     event.preventDefault();

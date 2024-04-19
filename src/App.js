@@ -15,26 +15,26 @@ app.get('/', (req, res) => {
 app.get('/home',(req,res)=>{
   res.sendFile('Logged_In.html',{root:'../public'});
 });
-app.get('/dog', (req, res) => {
-  res.sendFile('dog.html',{root:'../public'});
-    });
+
 app.get('/dog_home', (req, res) => {
   res.sendFile('dog_home.html',{root:'../public'});
 });
 app.get('/cat_home', (req, res) => {
   res.sendFile('cat_home.html',{root:'../public'});
 });
-app.get('/cat', (req, res) => {
-  res.sendFile('cat.html',{root:'../public'});
+
+app.get('/cart', (req, res) => {
+  res.sendFile('cart.html',{root:'../public'});
 });
-   
-app.get('/cart', async (req, res) => {
+app.use(express.static('../cart-app/src/index.js'));
+// Cart API routes
+app.get('/api/cart', async (req, res) => {
   try {
     const cartItems = await Cart.find();
-    res.sendFile(__dirname + '../public/cart.html', { cartItems });
+    res.json(cartItems);
   } catch (err) {
     console.error('Error fetching cart items:', err);
-    res.status(500).send('An error occurred while fetching the cart items');
+    res.status(500).json({ error: 'An error occurred while fetching the cart items' });
   }
 });
 

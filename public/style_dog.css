@@ -1,6 +1,9 @@
+body{
+  background-color: ;
+}
 .container {
     max-width: 1200px;
-    margin-top: 5vh;
+    position: relative;
     padding: 20px;
     text-align: center;
     font-family: Pecita;
