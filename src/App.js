@@ -1,25 +1,33 @@
 const express = require('express');
 const User = require('./models/User');
 const Cart = require('./models/Cart');
-
+const mongoose = require('mongoose');
+ 
+mongoose.connect('mongodb+srv://Chaitanya:chaitu1712@cluster0.un7nmla.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0')
+.then(() => console.log('Connected to MongoDB'))
+.catch((err) => console.error('Error connecting to MongoDB:', err));
 const app = express();
-
-app.use(express.static('html'));
-
+app.use(express.json());
+app.use(express.static('../public'));
 app.get('/', (req, res) => {
-  res.sendFile(__dirname + '../public/index.html');
+  res.sendFile('index.html',{root:'../public'});
+});
+app.get('/home',(req,res)=>{
+  res.sendFile('Logged_In.html',{root:'../public'});
 });
 app.get('/dog', (req, res) => {
-    res.sendFile(__dirname + '../public/dog.html');
+  res.sendFile('dog.html',{root:'../public'});
     });
-app.get('/cat', (req, res) => {
-    res.sendFile(__dirname + '../public/cat.html');
-    });
-    
-app.get('/contact', (req, res) => {
-  res.sendFile(__dirname + '../public/contact.html');
+app.get('/dog_home', (req, res) => {
+  res.sendFile('dog_home.html',{root:'../public'});
 });
-
+app.get('/cat_home', (req, res) => {
+  res.sendFile('cat_home.html',{root:'../public'});
+});
+app.get('/cat', (req, res) => {
+  res.sendFile('cat.html',{root:'../public'});
+});
+   
 app.get('/cart', async (req, res) => {
   try {
     const cartItems = await Cart.find();
@@ -31,35 +39,49 @@ app.get('/cart', async (req, res) => {
 });
 
 app.get('/login', (req, res) => {
-  res.sendFile(__dirname + '../public/login.html');
+  res.sendFile('login.html',{root:'../public'});
 });
 
 app.post('/login', async (req, res) => {
   const { username, password } = req.body;
-  try {
-    const user = await User.findOne({ username, password });
-    if (user) {
-           res.redirect('/cart');
-    } else {
-            res.sendFile(__dirname + '../public/login.html', { error: 'Invalid username or password' });
+    try {
+      // Find the user in the database
+      const user = await User.findOne({ username, password });
+  
+      if (user) {
+        // Login successful
+        res.status(200).send('Login successful');
+      } else {
+        // Invalid credentials
+        res.status(401).send('Invalid username or password');
+      }
+    } catch (error) {
+      console.error('Error during login:', error);
+      res.status(500).send('An error occurred during login');
     }
-  } catch (err) {
-    console.error('Error during login:', err);
-    res.status(500).send('An error occurred during login');
-  }
-});
+  });
 
 app.get('/register', (req, res) => {
-  res.sendFile(__dirname + '../public/register.html');
+  res.sendFile('signup.html',{root:'../public'});
 });
 
 app.post('/register', async (req, res) => {
   const { username, password, email } = req.body;
   try {
-    await User.create({ username, password, email });
-    res.redirect('/login');
-  } catch (err) {
-    console.error('Error during registration:', err);
+    // Check if the username or email is already taken
+    const existingUser = await User.findOne({ $or: [{ username }, { email }] });
+    if (existingUser) {
+      return res.status(400).send('Username or email already exists');
+    }
+
+    // Create a new user document
+    const newUser = new User({ username, password, email });
+    await newUser.save();
+
+    // Redirect to the login page after successful registration
+    res.status(200).json({ redirectUrl: '/login' });
+  } catch (error) {
+    console.error('Error during registration:', error);
     res.status(500).send('An error occurred during registration');
   }
 });

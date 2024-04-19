@@ -227,9 +227,13 @@ a{
     display: block;
     z-index: 2;
 }
-.login_frame:not(:focus){
-    display: none;
-    content: none;
+.login_frame:focus-within{
+    display: block;
+    z-index: 2;
+}
+.login_frame:hover{
+    display: block;
+    z-index: 2;
 }
 .nav:hover{
     background-color: white;

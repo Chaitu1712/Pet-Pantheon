@@ -10,12 +10,13 @@
 }
 .dog_button{
     position: relative;
-    top:-70vh;
-    left: 10%;
+    top:-65vh;
+    left: 2%;
     padding: 15px 25px;
     transform: translateX(-50%);
+    font-size: 24px;
+    font-family: 'Courier New', Courier, monospace;
     font-weight: bold;
-    font-size: 20px;
     color: #000000;
     background-color:white;
     border: 3px solid #000000;
@@ -32,13 +33,14 @@
     object-fit: cover;
 }
 .cat_button{
-    position: relative;
+    position: absolute;
     bottom:10vh;
-    left: 90%;
+    right: -2%;
     padding: 15px 25px;
     transform: translateX(-50%);
+    font-size: 24px;
+    font-family: 'Courier New', Courier, monospace;
     font-weight: bold;
-    font-size: 20px;
     color: #000000;
     background-color:white;
     border: 3px solid #000000;
