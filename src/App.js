@@ -2,7 +2,7 @@ const express = require('express');
 const User = require('./models/User');
 const Cart = require('./models/Cart');
 const mongoose = require('mongoose');
- 
+const urldecode = require('urldecode');
 mongoose.connect('mongodb+srv://Chaitanya:chaitu1712@cluster0.un7nmla.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0')
 .then(() => console.log('Connected to MongoDB'))
 .catch((err) => console.error('Error connecting to MongoDB:', err));
@@ -26,18 +26,35 @@ app.get('/cat_home', (req, res) => {
 app.get('/cart', (req, res) => {
   res.sendFile('index.html',{root:'../cart-app/public'});
 });
+app.get('/logout', (req, res) => {
+  res.clearCookie('username');
+  res.redirect('/');
+});
 app.use(express.static('../cart-app/src/index.js'));
 // Cart API routes
 app.get('/cart', async (req, res) => {
   try {
+    const cookies = req.headers.cookie.split('; ').reduce((prev, current) => {
+      const [name, value] = current.split('=');
+      prev[name] = urldecode(value);
+      return prev;
+    }, {});
+    const username = cookies.username;
     const cartItems = await Cart.find();
-    res.json(cartItems);
+    res.json(cartItems.filter(item => item.user === username));
   } catch (err) {
     console.error('Error fetching cart items:', err);
     res.status(500).json({ error: 'An error occurred while fetching the cart items' });
   }
 });
 app.post('/cart', async (req, res) => {
+  const cookies = req.headers.cookie.split('; ').reduce((prev, current) => {
+    const [name, value] = current.split('=');
+    prev[name] = urldecode(value);
+    return prev;
+  }, {});
+  const username = cookies.username;
+  console.log(username);
   const { name, price, quantity,img } = req.body;
   try {
     const existingProduct = await Cart
@@ -48,7 +65,7 @@ app.post('/cart', async (req, res) => {
       await existingProduct.save();
     }
     else {
-      const newProduct = new Cart({ name, price, quantity,img });
+      const newProduct = new Cart({ name, price, quantity,img, user: username});
       await newProduct.save();
     }
     res.status(200).send('Product added to cart successfully');
@@ -69,6 +86,7 @@ app.post('/login', async (req, res) => {
   
       if (user) {
         // Login successful
+        res.cookie('username', username, { maxAge:9000000,httpOnly: true });
         res.status(200).send('Login successful');
       } else {
         // Invalid credentials

@@ -3,7 +3,8 @@
     "express": "^4.19.2",
     "mongodb": "^6.5.0",
     "mongoose": "^8.3.2",
-    "nodemon": "^3.1.0"
+    "nodemon": "^3.1.0",
+    "urldecode": "^1.0.1"
   },
   "name": "petpantheon",
   "version": "1.0.0",
