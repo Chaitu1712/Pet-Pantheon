@@ -8,7 +8,6 @@
   "name": "petpantheon",
   "version": "1.0.0",
   "main": "App.js",
-  "devDependencies": {},
   "scripts": {
     "start": "nodemon App.js"
   },

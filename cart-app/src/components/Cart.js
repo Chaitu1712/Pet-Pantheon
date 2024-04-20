@@ -6,7 +6,7 @@ const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
 
   useEffect(() => {
-    fetch('/api/cart')
+    fetch('/cart')
       .then(response => response.json())
       .then(data => setCartItems(data))
       .catch(error => console.error('Error fetching cart items:', error));

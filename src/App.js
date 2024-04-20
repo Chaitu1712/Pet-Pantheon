@@ -24,11 +24,11 @@ app.get('/cat_home', (req, res) => {
 });
 
 app.get('/cart', (req, res) => {
-  res.sendFile('cart.html',{root:'../public'});
+  res.sendFile('index.html',{root:'../cart-app/public'});
 });
 app.use(express.static('../cart-app/src/index.js'));
 // Cart API routes
-app.get('/api/cart', async (req, res) => {
+app.get('/cart', async (req, res) => {
   try {
     const cartItems = await Cart.find();
     res.json(cartItems);
@@ -37,7 +37,26 @@ app.get('/api/cart', async (req, res) => {
     res.status(500).json({ error: 'An error occurred while fetching the cart items' });
   }
 });
-
+app.post('/cart', async (req, res) => {
+  const { name, price, quantity,img } = req.body;
+  try {
+    const existingProduct = await Cart
+      .findOne
+      ({ name });
+    if (existingProduct) {
+      existingProduct.quantity += 1;
+      await existingProduct.save();
+    }
+    else {
+      const newProduct = new Cart({ name, price, quantity,img });
+      await newProduct.save();
+    }
+    res.status(200).send('Product added to cart successfully');
+  } catch (err) {
+    console.error('Error adding product to cart:', err);
+    res.status(500).send('An error occurred while adding the product to the cart');
+  }
+});
 app.get('/login', (req, res) => {
   res.sendFile('login.html',{root:'../public'});
 });
