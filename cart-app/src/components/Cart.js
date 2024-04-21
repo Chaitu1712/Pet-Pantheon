@@ -1,15 +1,14 @@
-// components/Cart.js
 import React, { useState, useEffect } from 'react';
-import CartItem from './Cart_Item';
+import CartItem from './CartItem';
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
 
   useEffect(() => {
     fetch('/cart')
-      .then(response => response.json())
-      .then(data => setCartItems(data))
-      .catch(error => console.error('Error fetching cart items:', error));
+      .then(response => console.log(response.json()))
+      .then(data =>setCartItems(data))
+      .catch(error => console.log('Error fetching cart items:', error));
   }, []);
 
   return (
@@ -23,7 +22,6 @@ const Cart = () => {
             <CartItem key={item._id} item={item} />
           ))}
         </div>
-
       )}
     </div>
   );
