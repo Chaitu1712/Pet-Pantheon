@@ -1,27 +1,42 @@
 import React, { useState, useEffect } from 'react';
-import CartItem from './CartItem';
+import axios from 'axios';
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
 
   useEffect(() => {
-    fetch('/cart')
-      .then(response => console.log(response.json()))
-      .then(data =>setCartItems(data))
-      .catch(error => console.log('Error fetching cart items:', error));
+    const fetchCartItems = async () => {
+      try {
+        const response = await axios.get('/cart');
+        if (Array.isArray(response.data)) {
+          setCartItems(response.data);
+        } else {
+          console.error('Cart items data is not an array:', response.data);
+        }
+      } catch (error) {
+        console.error('Error fetching cart items:', error);
+      }
+    };
+
+    fetchCartItems();
   }, []);
 
   return (
     <div>
-      <h1>Cart</h1>
+      <h1>Cart Items</h1>
       {cartItems.length === 0 ? (
-        <p>Your cart is empty.</p>
+        <p>No items in the cart</p>
       ) : (
-        <div>
+        <ul>
           {cartItems.map(item => (
-            <CartItem key={item._id} item={item} />
+            <li key={item._id}>
+              <div>Name: {item.name}</div>
+              <div>Price: {item.price}</div>
+              <div>Quantity: {item.quantity}</div>
+              {/* Add more details if needed */}
+            </li>
           ))}
-        </div>
+        </ul>
       )}
     </div>
   );

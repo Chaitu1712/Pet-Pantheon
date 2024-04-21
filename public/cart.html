@@ -7,50 +7,6 @@
     <link rel="stylesheet" href="contact.css">
 </head>
 <body>
-    <div id="navbar" class="navbar">
-        <div class="logo">
-            <a href="../index.html">
-            <img src="Images/Icon.png" class="logo_img" alt="Pet Pantheon">
-            </a>
-            <a href="../index.html"><h1>PET PANTHEON</h1></a>
-        </div>
-        <div class="nav_links">
-            <div class="search">
-            <form action="search.php" method="post">
-                <input type="text" name="search" class="search_bar" placeholder="Search...">
-                <button type="submit" class="search_button">
-                    <img src="Images/Search.png" class="search_img" alt="Search">
-                </button>
-            </form>
-            </div>
-            <div class="cart nav">
-                <a href="cart.html" class="cart nav">
-                    <img src="Images/Cart.png" class="cart_img" alt="Cart">
-                    CART
-                </a>
-            </div>
-        <div class="home nav">
-        <a href="../index.html" class="home nav">
-            <img src="Images/Home.png" class="home_img" alt="Home">
-            HOME
-        </a>
-        </div>
-        <div class="contact nav">
-        <a href="#contact" class="contact nav">
-            <img src="Images\Contact.png" class="contact_img" alt="Contact">
-            CONTACT
-        </a>
-        </div>
-        <div class="login nav">
-        <a href="login.html" class="login nav">
-            <img src="Images\Login.png" class="login_img" alt="Login/Signup">
-            LOGIN/SIGNUP
-            <iframe src="Login_Frame.html" class="login_frame" name="login_frame" frameborder="0" loading="lazy">
-            </iframe>
-        </a>
-        </div>
-        </div>
-    </div>
     <h1 class="heading">Shopping Cart</h1>
     <table>
         <thead>
@@ -62,20 +18,13 @@
                 <th>Total</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody  id="Cart">
             <tr>
                 <td>HEARTSTRING COLLAR</td>
                 <td><img class="product-image" src="Images/Dog/prod1.png" alt="Dog Food"></td>
                 <td>Rs. 2999.00</td>
                 <td>2</td>
                 <td>Rs. 4998.00</td>
-            </tr>
-            <tr>
-                <td>Cat Home</td>
-                <td><img class="product-image" src="Images/Cat/prod1.jpeg" alt="Cat Toy"></td>
-                <td>Rs. 100000.00</td>
-                <td>1</td>
-                <td>Rs. 100000.00</td>
             </tr>
         </tbody>
         <tfoot>

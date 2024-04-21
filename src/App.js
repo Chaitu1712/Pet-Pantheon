@@ -18,9 +18,6 @@ app.use(express.static('../public'));//serve static files from the public direct
 app.use(express.static(path.join(__dirname, '../cart-app/build')));
 
 // Serve the React app for all routes
-app.get('/cart', (req, res) => {
-  res.sendFile(path.join(__dirname, '../cart-app/build', 'index.html'));
-});
 
 
 
@@ -55,39 +52,15 @@ app.get('/cart', async (req, res) => {//define a route handler for the cart page
     // Fetch the cart items from the database
     const cartItems = await Cart.find({ user: username});
     console.log(cartItems);
-    res.status(201).json(cartItems);//filter the cart items based on the username
+
+    res.status(200).json(cartItems);//filter the cart items based on the username
   } catch (err) {
     console.error('Error fetching cart items:', err);
     res.status(500).json({ error: 'An error occurred while fetching the cart items' });
 }
 });
-app.post('/cart', async (req, res) => {//define a route handler for adding the product to the cart
-
-  const cookies = req.headers.cookie.split('; ').reduce((prev, current) => {
-    const [name, value] = current.split('=');
-    prev[name] = urldecode(value);
-    return prev;
-  }, {});
-  const username = cookies.username;
-
-  const { name, price, quantity,img } = req.body;
-  try {
-    const existingProduct = await Cart
-      .findOne
-      ({ name, user: username});
-    if (existingProduct) {
-      existingProduct.quantity += 1;
-      await existingProduct.save();
-    }
-    else {
-      const newProduct = new Cart({ name, price, quantity,img, user: username});
-      await newProduct.save();
-    }
-    res.status(200).send('Product added to cart successfully');
-  } catch (err) {
-    console.error('Error adding product to cart:', err);
-    res.status(500).send('An error occurred while adding the product to the cart');
-  }
+app.get('/cart', (req, res) => {
+  res.sendFile(path.join(__dirname, '../cart-app/build/index.html'));
 });
 app.get('/login', (req, res) => {//define a route handler for the login page
   res.sendFile('login.html',{root:'../public'});
@@ -138,6 +111,34 @@ app.post('/register', async (req, res) => {//define a route handler for the user
   }
 });
 
+app.post('/cart', async (req, res) => {//define a route handler for adding the product to the cart
+
+  const cookies = req.headers.cookie.split('; ').reduce((prev, current) => {
+    const [name, value] = current.split('=');
+    prev[name] = urldecode(value);
+    return prev;
+  }, {});
+  const username = cookies.username;
+
+  const { name, price, quantity,img } = req.body;
+  try {
+    const existingProduct = await Cart
+      .findOne
+      ({ name, user: username});
+    if (existingProduct) {
+      existingProduct.quantity += 1;
+      await existingProduct.save();
+    }
+    else {
+      const newProduct = new Cart({ name, price, quantity,img, user: username});
+      await newProduct.save();
+    }
+    res.status(200).send('Product added to cart successfully');
+  } catch (err) {
+    console.error('Error adding product to cart:', err);
+    res.status(500).send('An error occurred while adding the product to the cart');
+  }
+});
 app.listen(3000, () => {
   console.log('Server is running on port 3000');
 });

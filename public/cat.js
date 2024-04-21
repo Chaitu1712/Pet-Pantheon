@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
       button.addEventListener('click', function() {
         const productInfo = {
           name: button.parentNode.querySelector('h3').textContent,
-          price: button.parentNode.querySelector('p').textContent.replace('$', ''),
+          price: button.parentNode.querySelector('p').textContent.replace('Rs. ', ''),
             quantity: 1,
             img:button.parentNode.querySelector('img').src
         };
