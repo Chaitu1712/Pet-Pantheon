@@ -1,6 +1,6 @@
 .container {
     max-width: 1200px;
-    margin-top: 5vh;
+    position: relative;
     padding: 20px;
     text-align: center;
     font-family: Pecita;
@@ -46,6 +46,7 @@
   }
 
   .product button {
+    cursor: pointer;
     display: block;
     background-color: #ff6f61;
     font-size: 20px;
@@ -54,8 +55,13 @@
     padding: 10px 20px;
     margin: 10px auto;
     border: none;
+    transition: 0.5s all ease-in-out;
   }
 
   .product button:hover {
-    background-color: #dd4b39;
+    border: 2px solid #dd4b39;
+    border-radius: 25px;
+    background-color:white;
+    color: #ff6f61;
+    font-weight: bold;
   }

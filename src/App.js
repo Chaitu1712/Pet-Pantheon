@@ -40,6 +40,9 @@ app.get('/logout', (req, res) => {//define a route handler for the logout page
   res.clearCookie('username');//clear the cookie
   res.redirect('/');
 });
+app.get('/cart', (req, res) => {//define a route handler for the cart page
+  res.sendFile(path.join(__dirname, '../cart-app/build/index.html'));
+});  
 app.get('/cart', async (req, res) => {//define a route handler for the cart page using react js
   try {
     //extract the username from the cookie
